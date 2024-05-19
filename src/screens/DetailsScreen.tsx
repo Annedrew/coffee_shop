@@ -63,7 +63,6 @@ const DetailsScreen = ({navigation, route}: any) => {
     navigation.navigate('Cart');
     
   };
-  console.log("favorite: ", ItemOfIndex)
 
   return (
     <View style={styles.ScreenContainer}>
