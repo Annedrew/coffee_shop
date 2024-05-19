@@ -19,7 +19,7 @@ export const useStore = create(
                     produce(state => {
                         const cartItemIndex = state.CartList.findIndex((item: any) => item.id === cartItem.id);
                         if (cartItemIndex !== -1) {
-                            const cartItemPriceIndex = state.CartList[cartItemIndex].prices.findIndex((price: any) => price.size === cartItem.price[0].size);
+                            const cartItemPriceIndex = state.CartList[cartItemIndex].prices.findIndex((price: any) => price.size === cartItem.prices.size);
                             if (cartItemPriceIndex !== -1) {
                                 state.CartList[cartItemIndex].prices[cartItemPriceIndex].quantity++;
                             } else {
