@@ -39,7 +39,7 @@ const DetailsScreen = ({navigation, route}: any) => {
     navigation.pop();
   };
 
-  const addToCarthandler = ({
+  const addToCartHandler = ({
     id,
     index,
     name,
@@ -61,6 +61,7 @@ const DetailsScreen = ({navigation, route}: any) => {
     });
     calculateCartPrice();
     navigation.navigate('Cart');
+    
   };
   console.log("favorite: ", ItemOfIndex)
 
@@ -148,7 +149,7 @@ const DetailsScreen = ({navigation, route}: any) => {
           price={price}
           buttonTitle="Add to Cart"
           buttonPressHandler={() => {
-            addToCarthandler({
+            addToCartHandler({
               id: ItemOfIndex.id,
               index: ItemOfIndex.index,
               name: ItemOfIndex.name,

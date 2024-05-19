@@ -74,6 +74,35 @@ export const useStore = create(
                         }
                     }),
                 ),
+            incrementCartItemQuantity: (id: string, size: string) =>
+                set(
+                    produce(state => {
+                        const itemIndex = state.CartList.findIndex((item: any) => item.id === id);
+                        const itemSizeIndex = state.CartList[itemIndex].findIndex((price: any) => price.size === size);
+                        state.CartList[itemIndex].prices[itemSizeIndex].quantity++;
+                    }),
+                ),
+            decrementCartItemQuantity: (id: string, size: string) =>
+                set(
+                    produce(state => {
+                        const itemIndex = state.CartList.findIndex((item: any) => item.id === id);
+                        const itemSizeIndex = state.CartList[itemIndex].findIndex((price: any) => price.size === size);
+
+                        if (state.CartList[itemIndex].prices.length > 1) {
+                            if (state.CartList[itemIndex].prices[itemSizeIndex].quantity > 1) {
+                                state.CartList[itemIndex].prices[itemSizeIndex].quantity--;
+                            } else {
+                                state.CartList[itemIndex].prices.splice(itemSizeIndex, 1);
+                            }
+                        } else {
+                            if (state.CartList[itemIndex].prices[itemSizeIndex].quantity > 1) {
+                                state.CartList[itemIndex].prices[itemSizeIndex].quantity--;
+                            } else {
+                                state.CartList.splice(itemIndex, 1);
+                            }
+                        }
+                    }),
+                ),
         }),
         {
             name: 'coffee-app',
