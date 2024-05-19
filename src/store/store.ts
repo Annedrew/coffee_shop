@@ -14,7 +14,7 @@ export const useStore = create(
             FavoritesList: [],
             CartList: [],
             OrderHistoryList: [],
-            addToCart: (cartItem: any) => {
+            addToCart: (cartItem: any) =>
                 set(
                     produce(state => {
                         const cartItemIndex = state.CartList.findIndex((item: any) => item.id === cartItem.id);
@@ -31,8 +31,7 @@ export const useStore = create(
                         }
                     }
                     )
-                )
-            },
+                ),
             calculateCartPrice: () =>
                 set(
                     produce(state => {
@@ -46,6 +45,33 @@ export const useStore = create(
                             item.itemPrice = itemPrice.toFixed(2);
                             totalprice += itemPrice;
                         })
+                    }),
+                ),
+            addToFavoriteList: (type: string, id: string) =>
+                set(
+                    produce(state => {
+                        const list = type === 'Coffee' ? state.CoffeeList : state.BeanList;
+                        const itemIndex = list.findIndex((item: any) => item.id === id);
+                        if (list[itemIndex].favorite === false) {
+                            list[itemIndex].favorite = true;
+                            state.FavoritesList.unshift(list[itemIndex]);
+                        } else {
+                            list[itemIndex].favorite = false;
+                        }
+                    }),
+                ),
+            deleteFromFavoriteList: (type: string, id: string) =>
+                set(
+                    produce(state => {
+                        const list = type === 'Coffee' ? state.CoffeeList : state.BeanList;
+                        const itemIndex = list.findIndex((item: any) => item.id === id);
+                        if (list[itemIndex].favorite === true) {
+                            list[itemIndex].favorite = false;
+                            const favoriteItemIndex = state.FavoritesList.findIndex((item: any) => item.id === id);
+                            state.FavoritesList.splice(favoriteItemIndex, 1);
+                        } else {
+                            list[itemIndex].favorite = true;
+                        }
                     }),
                 ),
         }),
