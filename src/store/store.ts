@@ -115,8 +115,8 @@ export const useStore = create(
                 set(
                     produce(state => {
                         let temp = state.CartList.reduce(
-                            (accumulator: number, currentValue: any) =>
-                                accumulator + parseFloat(currentValue.ItemPrice),
+                            (accumulator: number, currentValue: any) => 
+                                accumulator + parseFloat(currentValue.itemPrice),
                             0,
                         );
                         if (state.OrderHistoryList.length > 0) {
@@ -126,7 +126,7 @@ export const useStore = create(
                                     ' ' +
                                     new Date().toLocaleTimeString(),
                                 CartList: state.CartList,
-                                CartListPrice: temp.toFixed(2).toString(),
+                                CartListPrice: temp.toFixed(2),
                             });
                         } else {
                             state.OrderHistoryList.push({
@@ -135,7 +135,7 @@ export const useStore = create(
                                     ' ' +
                                     new Date().toLocaleTimeString(),
                                 CartList: state.CartList,
-                                CartListPrice: temp.toFixed(2).toString(),
+                                CartListPrice: temp.toFixed(2),
                             });
                         }
                         state.CartList = [];

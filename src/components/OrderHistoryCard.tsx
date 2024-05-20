@@ -49,7 +49,7 @@ import {
                 imagelink_square={data.imagelink_square}
                 special_ingredient={data.special_ingredient}
                 prices={data.prices}
-                ItemPrice={data.ItemPrice}
+                ItemPrice={data.itemPrice}
               />
             </TouchableOpacity>
           ))}
