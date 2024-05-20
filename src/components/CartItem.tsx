@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -62,7 +62,7 @@ const CartItem: React.FC<CartItemProps> = ({
               </View>
             </View>
           </View>
-          {prices.map((data: any, index: any) => (
+          {/* {prices.map((data: any, index: any) => (
             <View
               key={index.toString()}
               style={styles.CartItemSizeRowContainer}>
@@ -114,7 +114,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 </TouchableOpacity>
               </View>
             </View>
-          ))}
+          ))} */}
         </LinearGradient>
       ) : (
         <LinearGradient

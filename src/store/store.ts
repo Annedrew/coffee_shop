@@ -14,24 +14,27 @@ export const useStore = create(
             FavoritesList: [],
             CartList: [],
             OrderHistoryList: [],
-            addToCart: (cartItem: any) =>
+            clearCart: () => set({ CartList: [] }),
+            addToCart: (cartItem: any) => 
                 set(
-                    produce(state => {
+                    produce((state) => {
                         const cartItemIndex = state.CartList.findIndex((item: any) => item.id === cartItem.id);
                         if (cartItemIndex !== -1) {
-                            const cartItemPriceIndex = state.CartList[cartItemIndex].prices.findIndex((price: any) => price.size === cartItem.prices.size);
+                            const existingItem = state.CartList[cartItemIndex]
+                            const existingItemPrices = existingItem.prices;
+                            const cartItemPriceIndex = existingItemPrices.findIndex((price: any) => price.size === cartItem.prices[0].size);
                             if (cartItemPriceIndex !== -1) {
-                                state.CartList[cartItemIndex].prices[cartItemPriceIndex].quantity++;
+                                existingItem.prices[cartItemPriceIndex].quantity++;
                             } else {
-                                state.CartList[cartItemIndex].prices.push(cartItem.prices[0]);
+                                existingItem.prices.push({...cartItem.prices[0], quantity: 1});
                             }
-                            state.CartList[cartItemIndex].prices.sort((a: any, b: any) => b.size.localeCompare(a.size));
+                            existingItem.prices.sort((a: any, b: any) => b.size.localeCompare(a.size));
                         } else {
                             state.CartList.push(cartItem);
                         }
-                    }
-                    )
+                    })
                 ),
+            
             calculateCartPrice: () =>
                 set(
                     produce(state => {
