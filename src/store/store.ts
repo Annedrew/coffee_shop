@@ -10,7 +10,7 @@ export const useStore = create(
         (set, get) => ({
             CoffeeList: CoffeeData,
             BeanList: BeansData,
-            CartPrise: 0,
+            CartPrice: 0,
             FavoritesList: [],
             CartList: [],
             OrderHistoryList: [],
@@ -48,6 +48,8 @@ export const useStore = create(
                             item.itemPrice = itemPrice.toFixed(2);
                             totalprice += itemPrice;
                         })
+                        
+                        state.CartPrice = totalprice.toFixed(2).toString();
                     }),
                 ),
             addToFavoriteList: (type: string, id: string) =>
