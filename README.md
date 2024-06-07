@@ -8,5 +8,8 @@ cd android/
 2. Run the application
 ```
 npm start
+
+cd android/
+npx react-native run-android
 ```
 
